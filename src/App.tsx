@@ -3,6 +3,7 @@ import {Header} from "./layout/header/Header";
 import {Navbar} from "./layout/navbar/Navbar";
 import {Profile} from "./layout/profile/Profile";
 import {FlexWrapper} from "./components/FlexWrapper";
+import {Dialogs} from "./layout/dialogs/Dialogs";
 
 export type NavItemPropsType = {
     id: number
@@ -37,7 +38,8 @@ function App() {
             <Header/>
             <FlexWrapper justify={'flex-start'} padding={'0px'}>
                 <Navbar navItems={navItems}/>
-                <Profile/>
+                {/*<Profile/>*/}
+                <Dialogs/>
             </FlexWrapper>
         </div>
     );

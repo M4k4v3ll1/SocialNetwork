@@ -36,4 +36,8 @@ const StyledNav = styled.nav`
     margin: 0;
     padding-left: 0;
   }
+  
+  li {
+    color: white;
+  }
 `
