@@ -1,0 +1,23 @@
+.dialogs {
+    background-color: #26c9bb;
+    display: flex;
+    justify-content: flex-start;
+    gap: 100px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.dialogsItems {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialogsItems .active {
+    color: #efb22f;
+
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}

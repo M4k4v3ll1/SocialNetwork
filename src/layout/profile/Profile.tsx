@@ -1,24 +1,13 @@
 import React from 'react';
-import styled from "styled-components";
-import BG from '../../assets/img/Beach.jpg'
+import s from './Profile.module.css';
 import {MyPosts} from "./myPosts/MyPosts";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export const Profile = () => {
     return (
-        <StyledProfile>
-            <StyledProfileImg src={BG} alt={'Background picture: Beach'}/>
-            <div>
-                Ava+description
-            </div>
+        <div className={s.profile}>
+            <ProfileInfo/>
             <MyPosts/>
-        </StyledProfile>
+        </div>
     );
 };
-
-const StyledProfile = styled.main`
-  width: 80%;
-  background-color: #26c9bb;
-`
-const StyledProfileImg = styled.img`
-  height: 400px;
-`

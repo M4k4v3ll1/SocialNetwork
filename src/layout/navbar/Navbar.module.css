@@ -1,0 +1,21 @@
+.nav {
+    background-color: #96f37b;
+    width: 20%;
+    padding: 20px;
+}
+
+.ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.item {
+    color: white;
+    text-decoration: none;
+}
+
+.item_active {
+    color: #efb22f;
+    text-decoration: none;
+}

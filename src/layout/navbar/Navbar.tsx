@@ -1,43 +1,20 @@
-import React, {FC} from 'react';
-import styled from "styled-components";
+import React from 'react';
 import {FlexWrapper} from "../../components/FlexWrapper";
-import {NavItemPropsType} from "../../App";
+import {NavLink} from "react-router-dom";
+import s from './Navbar.module.css'
 
-export type NavbarPropsType = {
-    navItems: Array<NavItemPropsType>
-}
-
-export const Navbar: FC<NavbarPropsType> = ({navItems}) => {
-    const newNavItems: Array<JSX.Element> = [];
-    for (let i = 0; i < navItems.length; i++) {
-        const navItem: JSX.Element = <li>
-            <a>{navItems[i].title}</a>
-        </li>
-        newNavItems.push(navItem)
-    }
-
+export const Navbar = () => {
     return (
-        <StyledNav>
+        <nav className={s.nav}>
             <FlexWrapper justify={'flex-start'}>
-                <ul>
-                    {newNavItems}
+                <ul className={s.ul}>
+                    <li ><NavLink to="/profile" className={s.item} activeClassName={s.item_active}>Profile</NavLink></li>
+                    <li><NavLink to="/dialogs" className={s.item} activeClassName={s.item_active}>Messages</NavLink></li>
+                    <li><NavLink to="/news" className={s.item} activeClassName={s.item_active}>News</NavLink></li>
+                    <li><NavLink to="/music" className={s.item} activeClassName={s.item_active}>Music</NavLink></li>
+                    <li><NavLink to="/settings" className={s.item} activeClassName={s.item_active}>Settings</NavLink></li>
                 </ul>
             </FlexWrapper>
-        </StyledNav>
+        </nav>
     );
 };
-
-const StyledNav = styled.nav`
-  background-color: #96f37b;
-  width: 20%;
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding-left: 0;
-  }
-  
-  li {
-    color: white;
-  }
-`

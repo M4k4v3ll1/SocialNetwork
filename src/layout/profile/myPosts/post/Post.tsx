@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import styled from "styled-components";
-import postLogo from '../../../../assets/img/postLogo.webp'
+import postLogo from '../../../../components/assets/img/postLogo.png'
 
 type PostPropsType = {
     message: string
@@ -10,7 +10,7 @@ type PostPropsType = {
 export const Post: FC<PostPropsType> = ({message, likesCount}) => {
     return (
         <StyledPost>
-            <StyledPostImg src={postLogo} alt={'Logo Burunov'}/>
+            <StyledPostImg src={postLogo} alt={'User logo'}/>
             {message}
             <div>
                 <span>{likesCount} likes</span>

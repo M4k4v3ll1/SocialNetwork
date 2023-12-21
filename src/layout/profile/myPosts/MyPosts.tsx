@@ -1,15 +1,18 @@
 import React from 'react';
-import styled from "styled-components";
+import s from './MyPosts.module.css';
 import {Post} from "./post/Post";
 
 export const MyPosts = () => {
     return (
-        <StyledPosts>
-            <div>
+        <div className={s.postsBlocks}>
+            <h3>
                 My posts
+            </h3>
+            <div>
+                <textarea/>
             </div>
             <div>
-                New Post
+                <button>Add post</button>
             </div>
             <div>
                 <Post
@@ -21,10 +24,7 @@ export const MyPosts = () => {
                     likesCount={10}
                 />
             </div>
-        </StyledPosts>
-    );
+        </div>
+    )
+        ;
 };
-
-const StyledPosts = styled.div`
-
-`

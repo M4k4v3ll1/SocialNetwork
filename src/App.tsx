@@ -4,44 +4,28 @@ import {Navbar} from "./layout/navbar/Navbar";
 import {Profile} from "./layout/profile/Profile";
 import {FlexWrapper} from "./components/FlexWrapper";
 import {Dialogs} from "./layout/dialogs/Dialogs";
-
-export type NavItemPropsType = {
-    id: number
-    title: string
-}
+import {BrowserRouter, Route} from "react-router-dom";
+import {News} from "./layout/News/News";
+import {Music} from "./layout/Music/Music";
+import {Settings} from "./layout/Settings/Settings";
 
 function App() {
-    const navItems = [
-        {
-            id: 1,
-            title: 'Profile'
-        },
-        {
-            id: 2,
-            title: 'Messages'
-        },
-        {
-            id: 3,
-            title: 'News'
-        },
-        {
-            id: 4,
-            title: 'Music'
-        },
-        {
-            id: 5,
-            title: 'Settings'
-        }
-    ]
-    return (
+   return (
+        <BrowserRouter>
         <div className="app">
             <Header/>
             <FlexWrapper justify={'flex-start'} padding={'0px'}>
-                <Navbar navItems={navItems}/>
-                {/*<Profile/>*/}
-                <Dialogs/>
+                <Navbar/>
+                <div>
+                    <Route path='/profile' component={Profile}/>
+                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/settings' component={Settings}/>
+                </div>
             </FlexWrapper>
         </div>
+        </BrowserRouter>
     );
 }
 
