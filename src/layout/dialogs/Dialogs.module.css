@@ -22,3 +22,11 @@
     flex-direction: column;
     width: 400px;
 }
+
+.btn {
+    width: 50px;
+    border: 1px solid #ea798f;
+    background-color: pink;
+    border-radius: 5px;
+
+}
