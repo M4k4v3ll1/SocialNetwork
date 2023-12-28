@@ -22,7 +22,11 @@ export const Profile: FC<ProfilePropsType> = (
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <MyPosts posts={posts} addPost={addPost} updateNewPostText={updateNewPostText} newPostText={newPostText}/>
+            <MyPosts
+                posts={posts}
+                addPost={addPost}
+                updateNewPostText={updateNewPostText}
+                newPostText={newPostText}/>
         </div>
     );
 };

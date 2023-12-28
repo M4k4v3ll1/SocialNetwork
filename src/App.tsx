@@ -7,27 +7,21 @@ import {Dialogs} from "./layout/dialogs/Dialogs";
 import {News} from "./layout/News/News";
 import {Music} from "./layout/Music/Music";
 import {Settings} from "./layout/Settings/Settings";
-import {dialogsPageType, profilePageType, sendMessage} from "./redux/state";
 import {Route} from "react-router-dom";
+import {stateType, storeType} from "./redux/store";
 
 type AppPropsType = {
-    profile: profilePageType
-    dialogs: dialogsPageType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    sendMessage: () => void
-    updateMyMessageText: (messageText: string) => void
+    store: storeType
 }
 
 const App: FC<AppPropsType> = (
     {
-        profile,
-        dialogs,
-        addPost,
-        updateNewPostText,
-        updateMyMessageText
+        store,
     }
 ) => {
+
+    // @ts-ignore
+    const state: stateType = store.getState()
     return (
         <div className="app">
             <Header/>
@@ -38,18 +32,18 @@ const App: FC<AppPropsType> = (
                         path='/profile'
                         render={() =>
                             <Profile
-                                posts={profile.posts}
-                                addPost={addPost}
-                                updateNewPostText={updateNewPostText}
-                                newPostText={profile.newPostText}/>}/>
+                                posts={state.profilePage.posts}
+                                addPost={store.addPost.bind(store)}
+                                updateNewPostText={store.updateNewPostText.bind(store)}
+                                newPostText={state.profilePage.newPostText}/>}/>
                     <Route
                         path='/dialogs'
                         render={() =>
                             <Dialogs
-                                data={dialogs}
-                                sendMessage={sendMessage}
-                                updateMyMessageText={updateMyMessageText}
-                                myMessage={dialogs.myMessage}/>}/>
+                                data={state.dialogsPage}
+                                sendMessage={store.sendMessage.bind(store)}
+                                updateMyMessageText={store.updateMyMessageText.bind(store)}
+                                myMessage={state.dialogsPage.myMessage}/>}/>
                     <Route
                         path='/news'
                         render={() =>

@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useRef} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogsItem/DialogItem";
 import {Message} from "./message/Message";
-import {dialogsPageType} from "../../redux/state";
+import {dialogsPageType} from "../../redux/store";
 
 type DialogsPropsType = {
     data: dialogsPageType
@@ -27,6 +27,7 @@ export const Dialogs: FC<DialogsPropsType> = (
     )
 
     const newMessage = useRef<HTMLTextAreaElement>(null);
+
     const onClickSendNewMessageHandler = () => {
         sendMessage()
     }
