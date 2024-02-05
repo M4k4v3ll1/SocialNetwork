@@ -8,20 +8,20 @@ import {News} from "./layout/News/News";
 import {Music} from "./layout/Music/Music";
 import {Settings} from "./layout/Settings/Settings";
 import {Route} from "react-router-dom";
-import {stateType, storeType} from "./redux/store";
+import {ActionsTypes, StateType, StoreType} from "./redux/store";
 
 type AppPropsType = {
-    store: storeType
+    store: StoreType
+    dispatch: (action: ActionsTypes) => void
 }
 
 const App: FC<AppPropsType> = (
     {
         store,
+        dispatch
     }
 ) => {
-
-    // @ts-ignore
-    const state: stateType = store.getState()
+    const state: StateType = store.getState()
     return (
         <div className="app">
             <Header/>
@@ -33,17 +33,19 @@ const App: FC<AppPropsType> = (
                         render={() =>
                             <Profile
                                 posts={state.profilePage.posts}
-                                addPost={store.addPost.bind(store)}
-                                updateNewPostText={store.updateNewPostText.bind(store)}
-                                newPostText={state.profilePage.newPostText}/>}/>
+                                dispatch={dispatch}
+                                newPostText={state.profilePage.newPostText}
+                            />}
+                    />
                     <Route
                         path='/dialogs'
                         render={() =>
                             <Dialogs
                                 data={state.dialogsPage}
-                                sendMessage={store.sendMessage.bind(store)}
-                                updateMyMessageText={store.updateMyMessageText.bind(store)}
-                                myMessage={state.dialogsPage.myMessage}/>}/>
+                                dispatch={dispatch}
+                                myMessage={state.dialogsPage.newMessageText}
+                            />}
+                    />
                     <Route
                         path='/news'
                         render={() =>
