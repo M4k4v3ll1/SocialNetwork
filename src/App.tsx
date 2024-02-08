@@ -3,25 +3,22 @@ import {Header} from "./layout/header/Header";
 import {Navbar} from "./layout/navbar/Navbar";
 import {Profile} from "./layout/profile/Profile";
 import {FlexWrapper} from "./components/FlexWrapper";
-import {Dialogs} from "./layout/dialogs/Dialogs";
+import {DialogsContainer} from "./layout/dialogs/DialogsContainer";
 import {News} from "./layout/News/News";
 import {Music} from "./layout/Music/Music";
 import {Settings} from "./layout/Settings/Settings";
 import {Route} from "react-router-dom";
-import {ActionsTypes, StateType, StoreType} from "./redux/store";
+import {StoreType} from "./redux/store";
 
 type AppPropsType = {
     store: StoreType
-    dispatch: (action: ActionsTypes) => void
 }
 
 const App: FC<AppPropsType> = (
     {
-        store,
-        dispatch
+        store
     }
 ) => {
-    const state: StateType = store.getState()
     return (
         <div className="app">
             <Header/>
@@ -32,18 +29,14 @@ const App: FC<AppPropsType> = (
                         path='/profile'
                         render={() =>
                             <Profile
-                                posts={state.profilePage.posts}
-                                dispatch={dispatch}
-                                newPostText={state.profilePage.newPostText}
+                                store={store}
                             />}
                     />
                     <Route
                         path='/dialogs'
                         render={() =>
-                            <Dialogs
-                                data={state.dialogsPage}
-                                dispatch={dispatch}
-                                myMessage={state.dialogsPage.newMessageText}
+                            <DialogsContainer
+                                store={store}
                             />}
                     />
                     <Route

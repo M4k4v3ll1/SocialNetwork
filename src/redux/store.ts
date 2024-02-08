@@ -1,3 +1,6 @@
+import {profileReducer, profileReducerActionsTypes} from "./profileReducer";
+import {dialogsReducer, dialogsReducerActionsTypes} from "./dialogsReducer";
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -12,12 +15,12 @@ export type PostsType = {
     message: string
     likesCount: number
 }
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
 }
 
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newMessageText: string
@@ -29,33 +32,17 @@ export type MessagesType = {
 }
 type ObserverType = () => void
 
-export type ActionsTypes =
-    ReturnType<typeof addPostAC> |
-    ReturnType<typeof UpdateNewPostTextAC> |
-    ReturnType<typeof SendMessageAC> |
-    ReturnType<typeof UpdateMyMessageAC>
-
-export const addPostAC = () => ({type: 'ADD-POST'} as const)
-export const UpdateNewPostTextAC = (newText: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
-export const SendMessageAC = () => ({type: 'SEND-MESSAGE'} as const)
-export const UpdateMyMessageAC = (messageText: string) => ({type: 'UPDATE-NEW-MESSAGE-TEXT', messageText} as const)
-
 export type StoreType = {
     _callSubscriber: () => void
     _state: StateType
     getState: () => StateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    sendMessage: () => void
-    updateMyMessageText: (messageText: string) => void
     subscribe: (observer: ObserverType) => void
     dispatch: (action: ActionsTypes) => void
 }
 
+export type ActionsTypes = profileReducerActionsTypes | dialogsReducerActionsTypes
+
 export const store: StoreType = {
-    _callSubscriber() {
-        console.log('state was changed')
-    },
     _state: {
         profilePage: {
             posts: [
@@ -83,51 +70,18 @@ export const store: StoreType = {
             newMessageText: ''
         }
     },
+    _callSubscriber() {
+        console.log('state was changed')
+    },
     getState() {
         return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
-    addPost() {
-        const newPost = {id: 5, message: this._state.profilePage.newPostText, likesCount: 0};
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
+    dispatch(action: any) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber();
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber();
-    },
-    sendMessage() {
-        const newMessage = {id: 7, isIncoming: false, message: this._state.dialogsPage.newMessageText};
-        this._state.dialogsPage.messages.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber();
-    },
-    updateMyMessageText(messageText) {
-        this._state.dialogsPage.newMessageText = messageText;
-        this._callSubscriber();
-    },
-    dispatch(action: ActionsTypes) {
-        if (action.type === "ADD-POST") {
-            const newPost = {id: 5, message: this._state.profilePage.newPostText, likesCount: 0};
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber();
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber();
-        } else if (action.type === "SEND-MESSAGE") {
-            const newMessage = {id: 7, isIncoming: false, message: this._state.dialogsPage.newMessageText};
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber();
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessageText = action.messageText;
-            this._callSubscriber();
-        } else {
-            return this._state
-        }
     }
 }

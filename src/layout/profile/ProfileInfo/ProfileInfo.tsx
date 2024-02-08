@@ -2,7 +2,6 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import BG from '../../../components/assets/img/beach.webp';
 
-
 export const ProfileInfo = () => {
     return (
         <div className={s.profileInfo}>
