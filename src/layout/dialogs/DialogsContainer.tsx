@@ -14,8 +14,8 @@ type MapStatePropsType = {
     myMessage: string
 }
 type MapDispatchPropsType = {
-    callbackOnChangeMessageText: () => void
-    callbackOnClickSendNewMessage: (messageText: string) => void
+    callbackOnChangeMessageText: (messageText: string) => void
+    callbackOnClickSendNewMessage: () => void
 }
 
 export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -26,13 +26,13 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         myMessage: state.dialogsPage.newMessageText
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        callbackOnChangeMessageText: () => {
-            dispatch(SendMessageAC())
-        },
-        callbackOnClickSendNewMessage: (newMessageText: string) => {
+        callbackOnChangeMessageText: (newMessageText: string) => {
             dispatch(UpdateMyMessageAC(newMessageText))
+        },
+        callbackOnClickSendNewMessage: () => {
+            dispatch(SendMessageAC())
         },
 
     }

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {Header} from "./layout/header/Header";
 import {Navbar} from "./layout/navbar/Navbar";
 import {Profile} from "./layout/profile/Profile";
@@ -8,17 +8,8 @@ import {News} from "./layout/News/News";
 import {Music} from "./layout/Music/Music";
 import {Settings} from "./layout/Settings/Settings";
 import {Route} from "react-router-dom";
-import {StoreType} from "./redux/store";
 
-type AppPropsType = {
-    store: StoreType
-}
-
-const App: FC<AppPropsType> = (
-    {
-        store
-    }
-) => {
+const App = () => {
     return (
         <div className="app">
             <Header/>
@@ -28,16 +19,12 @@ const App: FC<AppPropsType> = (
                     <Route
                         path='/profile'
                         render={() =>
-                            <Profile
-                                store={store}
-                            />}
+                            <Profile/>}
                     />
                     <Route
                         path='/dialogs'
                         render={() =>
-                            <DialogsContainer
-                                store={store}
-                            />}
+                            <DialogsContainer/>}
                     />
                     <Route
                         path='/news'

@@ -19,8 +19,8 @@ export const Dialogs: FC<DialogsPropsType> = (
         <Message key={m.id} isIncoming={m.isIncoming} message={m.message}/>
     )
 
-    const onClickSendNewMessageHandler = (myMessage: string) => {
-        callbackOnClickSendNewMessage(myMessage)
+    const onClickSendNewMessageHandler = () => {
+        callbackOnClickSendNewMessage()
     }
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         callbackOnChangeMessageText(e.currentTarget.value)
