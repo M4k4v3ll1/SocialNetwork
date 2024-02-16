@@ -19,19 +19,19 @@ export type MessagesType = {
 
 const initialState: DialogsPageType = {
     dialogs: [
-        {id: 1, name: 'Maksim Bagryantsev'},
-        {id: 2, name: 'Ivan Chekmasov'},
-        {id: 3, name: 'Andrew Malikov'},
-        {id: 4, name: 'Pavel Ivanushkin'},
+        {id: 1, name: 'Максим Багрянцев'},
+        {id: 2, name: 'Иван Чекмасов'},
+        {id: 3, name: 'Андрей Маликов'},
+        {id: 4, name: 'Павел Иванушкин'},
         {id: 5, name: 'Jessica Chastain'}
     ],
      messages: [
-        {id: 1, isIncoming: false, message: 'Hi'},
-        {id: 2, isIncoming: true, message: 'Hi, man!'},
-        {id: 3, isIncoming: false, message: 'How are you'},
-        {id: 4, isIncoming: true, message: 'Feeling like a rocket! What about you?'},
-        {id: 5, isIncoming: false, message: 'Me too! Let\'s go snowboarding'},
-        {id: 6, isIncoming: true, message: 'Let\'s ride!'}
+        {id: 1, isIncoming: false, message: 'Привет'},
+        {id: 2, isIncoming: true, message: 'Доброго дня, товарищ!'},
+        {id: 3, isIncoming: false, message: 'Как поживаешь'},
+        {id: 4, isIncoming: true, message: 'С гордостью в сердце! Готов?'},
+        {id: 5, isIncoming: false, message: 'Всегда готов!'},
+        {id: 6, isIncoming: true, message: 'Добре!'}
     ],
     newMessageText: ''
 }

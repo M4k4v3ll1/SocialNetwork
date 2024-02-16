@@ -10,6 +10,7 @@ export const Navbar = () => {
                 <ul className={s.ul}>
                     <li ><NavLink to="/profile" className={s.item} activeClassName={s.item_active}>Profile</NavLink></li>
                     <li><NavLink to="/dialogs" className={s.item} activeClassName={s.item_active}>Messages</NavLink></li>
+                    <li><NavLink to="/users" className={s.item} activeClassName={s.item_active}>Users</NavLink></li>
                     <li><NavLink to="/news" className={s.item} activeClassName={s.item_active}>News</NavLink></li>
                     <li><NavLink to="/music" className={s.item} activeClassName={s.item_active}>Music</NavLink></li>
                     <li><NavLink to="/settings" className={s.item} activeClassName={s.item_active}>Settings</NavLink></li>
