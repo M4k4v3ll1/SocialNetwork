@@ -1,3 +1,16 @@
 .photo {
     width: 30px;
 }
+
+.page {
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-size: 20px;
+    color: gold;
+    font-weight: bold;
+    cursor: pointer;
+}

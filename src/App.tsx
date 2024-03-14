@@ -30,6 +30,10 @@ const App = () => {
                     <Route
                         path='/users'
                         render={() =>
+                            <div>users</div>}/>
+                    <Route
+                        path='/users'
+                        render={() =>
                             <UsersContainer/>}/>
                     <Route
                         path='/news'
