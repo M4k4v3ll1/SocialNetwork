@@ -1,4 +1,17 @@
 .img_logo {
+    display: flex;
     width: 40px;
     height: 40px;
+}
+
+.loginBlock {
+
+}
+
+.loginBlock a {
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    color: #26c9bb;
+    font-size: 24px;
 }

@@ -1,4 +1,4 @@
-import {profileReducer, profileReducerActionsTypes} from "./profileReducer";
+import {profileReducer, profileReducerActionsTypes, ProfileType} from "./profileReducer";
 import {dialogsReducer, dialogsReducerActionsTypes} from "./dialogsReducer";
 
 export type StateType = {
@@ -9,6 +9,7 @@ export type StateType = {
 export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
+    profile: ProfileType
 }
 export type PostsType = {
     id: number
@@ -49,7 +50,28 @@ export const store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 5},
                 {id: 2, message: 'It\'s my first post!', likesCount: 10}
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: {
+                userId: 1,
+                aboutMe: '',
+                fullName: '',
+                contacts: {
+                    facebook: '',
+                    website: '',
+                    vk: '',
+                    twitter: '',
+                    instagram: '',
+                    youtube: '',
+                    github: '',
+                    mainLink: ''
+                },
+                lookingForAJob: false,
+                lookingForAJobDescription: '',
+                photos: {
+                    small: '',
+                    large: ''
+                }
+            }
         },
         dialogsPage: {
             dialogs: [

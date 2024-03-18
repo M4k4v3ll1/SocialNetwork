@@ -18,7 +18,6 @@ export const MyPosts: FC<MyPostsPropsType> = (
         callbackOnClickAddPost
     }
 ) => {
-    debugger
     const postElements = posts.map(p =>
         <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
