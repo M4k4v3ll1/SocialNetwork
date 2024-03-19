@@ -9,6 +9,7 @@ type ProfileInfoPropsType = {
 }
 
 export const ProfileInfo: FC<ProfileInfoPropsType> = ({profile}) => {
+    console.log(profile)
     if (!profile) {
         return <Preloader/>
     }

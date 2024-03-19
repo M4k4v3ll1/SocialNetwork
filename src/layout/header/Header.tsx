@@ -7,13 +7,13 @@ import {NavLink} from "react-router-dom";
 import {HeaderContainerPropType} from "./HeaderContainer";
 
 export const Header = (props: HeaderContainerPropType) => {
-    debugger
+    console.log(props.auth)
     return (
         <StyledHeader>
             <FlexWrapper>
                 <img src={iconsSprite} className={s.img_logo} alt='logo image'/>
                 <div className={s.loginBlock}>
-                    {props.auth.login === 'TrandinII'
+                    {props.auth.isAuth
                     ? props.auth.login
                     : <NavLink to={'/login'}>Login</NavLink>}
                 </div>

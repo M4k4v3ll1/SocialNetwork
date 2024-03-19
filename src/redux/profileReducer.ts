@@ -1,4 +1,6 @@
 import {PostsType, ProfilePageType} from "./store";
+import {Dispatch} from "redux";
+import {profileAPI} from "../components/api/Api";
 
 export type ProfileType = {
     userId: number
@@ -75,4 +77,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: pr
             return state
         }
     }
+}
+
+export const getProfile = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getProfile(userId)
+        .then(res => {
+            dispatch(setUserProfile(res.data))
+        })
 }
