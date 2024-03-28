@@ -9,7 +9,6 @@ type ProfilePropsType = {
 }
 
 export const Profile: FC<ProfilePropsType> = ({profile}) => {
-    debugger
     return (
         <div className={s.profile}>
             <ProfileInfo profile={profile}/>

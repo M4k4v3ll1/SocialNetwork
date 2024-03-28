@@ -3,7 +3,6 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogsItem/DialogItem";
 import {Message} from "./message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
 
 export const Dialogs: FC<DialogsPropsType> = (
     {
@@ -11,7 +10,7 @@ export const Dialogs: FC<DialogsPropsType> = (
         myMessage,
         callbackOnChangeMessageText,
         callbackOnClickSendNewMessage,
-        isAuth
+        // isAuth
     }
 ) => {
     const dialogsElements = dialogsPage.dialogs.map(d =>
@@ -27,9 +26,9 @@ export const Dialogs: FC<DialogsPropsType> = (
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         callbackOnChangeMessageText(e.currentTarget.value)
     }
-    if (!isAuth) {
-        return <Redirect to={'/login'}/>
-    }
+    // if (!isAuth) {
+    //     return <Redirect to={'/login'}/>
+    // }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
