@@ -1,7 +1,6 @@
 import React from 'react';
 import {Navbar} from "./layout/navbar/Navbar";
 import {FlexWrapper} from "./components/FlexWrapper";
-import {DialogsContainer} from "./layout/dialogs/DialogsContainer";
 import {News} from "./layout/news/News";
 import {Music} from "./layout/music/Music";
 import {Settings} from "./layout/settings/Settings";
@@ -10,6 +9,7 @@ import {UsersContainer} from "./layout/users/UsersContainer";
 import ProfileContainer from "./layout/profile/ProfileContainer";
 import HeaderContainer from "./layout/header/HeaderContainer";
 import {Login} from "./components/login/Login";
+import DialogsContainer from "./layout/dialogs/DialogsContainer";
 
 const App = () => {
     return (

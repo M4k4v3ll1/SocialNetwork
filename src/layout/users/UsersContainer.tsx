@@ -11,6 +11,7 @@ import {
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../../components/common/preloader/Preloader";
+import {compose} from "redux";
 
 type MapStateToProps = {
     usersPage: UsersInitialStateType
@@ -84,14 +85,15 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    onPageChanged: setCurrentPage,
-    toggleIsFetching,
-    toggleIsFollowingProgress,
-    getUsers,
-    follow,
-    unfollow
-})(UsersAPIComponent)
+export const UsersContainer = compose(
+    connect(mapStateToProps, {
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        onPageChanged: setCurrentPage,
+        toggleIsFetching,
+        toggleIsFollowingProgress,
+        getUsers,
+        follow,
+        unfollow})
+)(UsersAPIComponent)
