@@ -1,4 +1,4 @@
-import {profileReducer, profileReducerActionsTypes, ProfileType} from "./profileReducer";
+import {profileReducer, ProfileReducerActionsTypes, ProfileType} from "./profileReducer";
 import {dialogsReducer, dialogsReducerActionsTypes} from "./dialogsReducer";
 
 export type StateType = {
@@ -9,7 +9,8 @@ export type StateType = {
 export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
-    profile: ProfileType
+    profile: ProfileType,
+    status: string
 }
 export type PostsType = {
     id: number
@@ -41,7 +42,7 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = profileReducerActionsTypes | dialogsReducerActionsTypes
+export type ActionsTypes = ProfileReducerActionsTypes | dialogsReducerActionsTypes
 
 export const store: StoreType = {
     _state: {
@@ -71,7 +72,8 @@ export const store: StoreType = {
                     small: '',
                     large: ''
                 }
-            }
+            },
+            status: ''
         },
         dialogsPage: {
             dialogs: [
