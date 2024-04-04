@@ -14,7 +14,7 @@ export const Header = (props: HeaderContainerPropType) => {
                 <img src={iconsSprite} className={s.img_logo} alt='logo image'/>
                 <div className={s.loginBlock}>
                     {props.auth.isAuth
-                    ? props.auth.login
+                        ? (<div>{props.auth.login} - <button onClick={props.logout}>Logout</button></div>)
                     : <NavLink to={'/login'}>Login</NavLink>}
                 </div>
             </FlexWrapper>

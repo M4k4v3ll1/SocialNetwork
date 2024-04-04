@@ -8,7 +8,6 @@ export type StateType = {
 
 export type ProfilePageType = {
     posts: PostsType[]
-    newPostText: string
     profile: ProfileType,
     status: string
 }
@@ -25,7 +24,6 @@ type DialogsType = {
 type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
-    newMessageText: string
 }
 export type MessagesType = {
     id: number
@@ -51,7 +49,6 @@ export const store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 5},
                 {id: 2, message: 'It\'s my first post!', likesCount: 10}
             ],
-            newPostText: '',
             profile: {
                 userId: 1,
                 aboutMe: '',
@@ -90,8 +87,7 @@ export const store: StoreType = {
                 {id: 4, isIncoming: true, message: 'Feeling like a rocket! What about you?'},
                 {id: 5, isIncoming: false, message: 'Me too! Let\'s go snowboarding'},
                 {id: 6, isIncoming: true, message: 'Let\'s ride!'}
-            ],
-            newMessageText: ''
+            ]
         }
     },
     _callSubscriber() {

@@ -1,15 +1,16 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {FC} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogsItem/DialogItem";
 import {Message} from "./message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {FormControl} from "../../components/common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 export const Dialogs: FC<DialogsPropsType> = (
     {
         dialogsPage,
-        myMessage,
-        callbackOnChangeMessageText,
-        callbackOnClickSendNewMessage,
+        callbackOnChangeMessageText
         // isAuth
     }
 ) => {
@@ -20,12 +21,10 @@ export const Dialogs: FC<DialogsPropsType> = (
         <Message key={m.id} isIncoming={m.isIncoming} message={m.message}/>
     )
 
-    const onClickSendNewMessageHandler = () => {
-        callbackOnClickSendNewMessage()
+    const addNewMessage = (value: FormDataType) => {
+        callbackOnChangeMessageText(value.newMessageBody)
     }
-    const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        callbackOnChangeMessageText(e.currentTarget.value)
-    }
+
     // if (!isAuth) {
     //     return <Redirect to={'/login'}/>
     // }
@@ -36,13 +35,32 @@ export const Dialogs: FC<DialogsPropsType> = (
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <textarea
-                    onChange={onChangeMessageTextHandler}
-                    placeholder={'Enter your message'}
-                    value={myMessage}/>
-                <button onClick={onClickSendNewMessageHandler} className={s.btn}>Send</button>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
         </div>
     )
 }
 
+type FormDataType = {
+    newMessageBody: string
+}
+const maxLength100 = maxLengthCreator(100)
+const AddMessageForm: FC<InjectedFormProps<FormDataType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field
+                    component={FormControl}
+                    validate={[required, maxLength100]}
+                    name={'newMessageBody'}
+                    placeholder={'Enter your message'}
+                type={'textarea'}/>
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    )
+}
+
+const AddMessageFormRedux = reduxForm<FormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)

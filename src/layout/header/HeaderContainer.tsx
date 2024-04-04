@@ -1,8 +1,9 @@
-import React, {FC, useEffect} from 'react';
+import React, {ComponentType, FC} from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {DataType, setUser} from "../../redux/auth-reducer";
+import {DataType, logout} from "../../redux/auth-reducer";
+import {compose} from "redux";
 
 export type HeaderContainerPropType = MapStateToProps & MapDispatchToProps
 type MapStateToProps = {
@@ -10,16 +11,12 @@ type MapStateToProps = {
 }
 
 type MapDispatchToProps = {
-    setUser: () => void
+    logout: () => void
 }
 
-export const HeaderContainer: FC<HeaderContainerPropType> = (props) => {
-    useEffect(() => {
-        props.setUser()
-    }, [])
-
+const HeaderContainer: FC<HeaderContainerPropType> = (props) => {
     return (
-        <Header auth={props.auth} setUser={props.setUser}/>
+        <Header auth={props.auth} logout={props.logout}/>
     );
 };
 
@@ -28,4 +25,6 @@ const mapStateToProps = (state: AppStateType) => ({
     auth: state.auth.data
 })
 
-export default connect(mapStateToProps, {setUser})(HeaderContainer)
+export default compose<ComponentType>(
+    connect(mapStateToProps, {logout})
+    )(HeaderContainer)

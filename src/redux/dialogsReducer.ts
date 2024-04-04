@@ -1,11 +1,9 @@
 export type dialogsReducerActionsTypes =
-    ReturnType<typeof SendMessageAC> |
-    ReturnType<typeof UpdateMyMessageAC>
+    ReturnType<typeof SendMessageAC>
 
 export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessagesType[]
-    newMessageText: string
 }
 export type DialogType = {
     id: number
@@ -33,24 +31,19 @@ const initialState: DialogsPageType = {
         {id: 5, isIncoming: false, message: 'Всегда готов!'},
         {id: 6, isIncoming: true, message: 'Добре!'}
     ],
-    newMessageText: ''
 }
-
-export const SendMessageAC = () => ({type: 'SEND-MESSAGE'} as const)
-export const UpdateMyMessageAC = (messageText: string) => ({type: 'UPDATE-NEW-MESSAGE-TEXT', messageText} as const)
-
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: dialogsReducerActionsTypes): DialogsPageType => {
     switch (action.type) {
         case 'SEND-MESSAGE': {
-            const newMessage = {id: 7, isIncoming: false, message: state.newMessageText};
-            return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
-        }
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-            return {...state, newMessageText: action.messageText}
+            const newMessage = {id: 7, isIncoming: false, message: action.newMessageBody};
+            return {...state, messages: [...state.messages, newMessage]}
         }
         default: {
             return state
         }
     }
 }
+
+
+export const SendMessageAC = (newMessageBody: string) => ({type: 'SEND-MESSAGE', newMessageBody} as const)

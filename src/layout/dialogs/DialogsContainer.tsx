@@ -1,9 +1,5 @@
-import React, {ComponentType} from 'react';
-import {
-    DialogsPageType,
-    SendMessageAC,
-    UpdateMyMessageAC
-} from "../../redux/dialogsReducer";
+import {ComponentType} from 'react';
+import {DialogsPageType, SendMessageAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
@@ -12,30 +8,23 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
-    myMessage: string
 }
 type MapDispatchPropsType = {
     callbackOnChangeMessageText: (messageText: string) => void
-    callbackOnClickSendNewMessage: () => void
 }
 
 export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        dialogsPage: state.dialogsPage,
-        myMessage: state.dialogsPage.newMessageText,
+        dialogsPage: state.dialogsPage
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         callbackOnChangeMessageText: (newMessageText: string) => {
-            dispatch(UpdateMyMessageAC(newMessageText))
-        },
-        callbackOnClickSendNewMessage: () => {
-            dispatch(SendMessageAC())
-        },
-
+            dispatch(SendMessageAC(newMessageText))
+        }
     }
 }
 export default compose<ComponentType>(
