@@ -101,7 +101,7 @@ export const usersReducer = (state: UsersInitialStateType = initialState, action
 
 export const requestUsers = (isFetching: boolean, page: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(isFetching))
-    usersAPI.getUsers(page, pageSize)
+    usersAPI.requestUsers(page, pageSize)
         .then(data => {
             dispatch(toggleIsFetching(isFetching))
             dispatch(setUsers(data.items))
