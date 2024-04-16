@@ -13,11 +13,11 @@ let initialState: InitialStateType = {
     messages: []
 }
 
-export const setAuthUserData = (payload: DataType) => ({type: 'SET-USER-DATA', payload} as const)
+export const setAuthUserData = (payload: DataType) => ({type: 'auth/SET-USER-DATA', payload} as const)
 
 export const authReducer = (state: InitialStateType = initialState, action: authReducerActionTypes): InitialStateType => {
     switch (action.type) {
-        case 'SET-USER-DATA': {
+        case 'auth/SET-USER-DATA': {
             return {...state, data: {...action.payload}}
         }
         default: {
@@ -26,17 +26,14 @@ export const authReducer = (state: InitialStateType = initialState, action: auth
     }
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    return authApi.me()
-        .then(res => {
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    const res = await authApi.me()
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserData({...res.data.data, isAuth: true}))
             }
-        })
 }
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-    authApi.login(email, password, rememberMe)
-        .then(res => {
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+    const res = await authApi.login(email, password, rememberMe)
             if (res.data.resultCode === 0) {
                 dispatch(getAuthUserData())
             } else {
@@ -44,15 +41,12 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
                     dispatch(stopSubmit('login', {_error: res.data.messages[0]}))
                 }
             }
-        })
 }
-export const logout = () => (dispatch: Dispatch) => {
-    authApi.logout()
-        .then(res => {
+export const logout = () => async (dispatch: Dispatch) => {
+    const res = await authApi.logout()
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserData({id: 0, email: '', login: '', isAuth: false}))
             }
-        })
 }
 
 export type InitialStateType = {

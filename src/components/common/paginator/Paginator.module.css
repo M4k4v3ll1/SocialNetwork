@@ -1,0 +1,12 @@
+.page {
+    font-size: 10px;
+    color: black;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-size: 12px;
+    color: gold;
+    font-weight: bold;
+    cursor: pointer;
+}

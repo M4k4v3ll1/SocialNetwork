@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {FormControl} from "../common/FormsControls/FormsControls";
+import {createField, FormControl} from "../common/formsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
-import s from '../common/FormsControls/FormsControls.module.css'
+import s from '../common/formsControls/FormsControls.module.css'
 
 const Login = (props: MapStateToProps & MapDispatchToProps) => {
     const onSubmit = (formData: FormDataType) => {
@@ -43,9 +43,12 @@ type FormDataType = {
     rememberMe: boolean
 }
 
-export const LoginForm: FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            {/*{createField('Email', 'email', FormControl, required, 'input')}*/}
+            {/*{createField('Password', 'password', FormControl, required, 'input')}*/}
+            {/*{createField('Password', 'rememberMe', 'input', undefined, 'checkbox')}*/}
             <div>
                 <Field placeholder={'Email'} name={'email'} component={FormControl} type={'input'}
                        validate={[required]}/>
@@ -57,7 +60,7 @@ export const LoginForm: FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> remember me
             </div>
-            {props.error && <div className={s.formControlSummaryError}>{props.error}</div>}
+            {error && <div className={s.formControlSummaryError}>{error}</div>}
             <div>
                 <button>Login</button>
             </div>

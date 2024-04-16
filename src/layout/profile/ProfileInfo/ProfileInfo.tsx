@@ -11,7 +11,6 @@ type ProfileInfoPropsType = {
 }
 
 export const ProfileInfo: FC<ProfileInfoPropsType> = ({profile, status, updateStatus}) => {
-    console.log(profile)
     if (!profile) {
         return <Preloader/>
     }

@@ -1,22 +1,23 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from "./post/Post";
 import {postsType} from "../../../redux/state";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
-import {FormControl} from "../../../components/common/FormsControls/FormsControls";
+import {FormControl} from "../../../components/common/formsControls/FormsControls";
 
 type MyPostsPropsType = {
     posts: postsType[]
     callbackOnClickAddPost: (newPostText: string) => void
 }
 
-export const MyPosts: FC<MyPostsPropsType> = (
+export const MyPosts: FC<MyPostsPropsType> = memo((
     {
         posts,
         callbackOnClickAddPost
     }
 ) => {
+    console.log('Render MyPosts')
     const postElements = posts.map(p =>
         <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
@@ -36,7 +37,7 @@ export const MyPosts: FC<MyPostsPropsType> = (
             </div>
         </div>
     );
-};
+})
 
 type FormDataType = {
     newPostBody: string

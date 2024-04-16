@@ -48,12 +48,14 @@ export type UsersPropsType = MapStateToProps & MapDispatchToProps
 
 class UsersAPIComponent extends React.Component<UsersPropsType, AppStateType> {
     componentDidMount() {
-        this.props.getUsers(this.props.isFetching, this.props.currentPage, this.props.pageSize)
+        const {isFetching, currentPage, pageSize} = this.props
+        this.props.getUsers(isFetching, currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
-        this.props.getUsers(this.props.isFetching, pageNumber, this.props.pageSize)
+        const {isFetching, pageSize} = this.props
+        this.props.getUsers(isFetching, pageNumber, pageSize)
     }
 
     render() {
@@ -84,17 +86,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType, AppStateType> {
         )
     }
 }
-
-// const mapStateToProps = (state: AppStateType): MapStateToProps => {
-//     return {
-//         usersPage: state.usersPage,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
 const mapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         users: getUsers(state),

@@ -7,7 +7,6 @@ import {NavLink} from "react-router-dom";
 import {HeaderContainerPropType} from "./HeaderContainer";
 
 export const Header = (props: HeaderContainerPropType) => {
-    console.log(props.auth)
     return (
         <StyledHeader>
             <FlexWrapper>

@@ -4,7 +4,7 @@ import {DialogItem} from "./dialogsItem/DialogItem";
 import {Message} from "./message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {FormControl} from "../../components/common/FormsControls/FormsControls";
+import {FormControl} from "../../components/common/formsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 export const Dialogs: FC<DialogsPropsType> = (
