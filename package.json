@@ -64,5 +64,6 @@
     "@types/react-test-renderer": "17.0.1",
     "@types/redux-form": "8.3.3",
     "@types/uuid": "8.3.4"
-  }
+  },
+  "homepage": "https://M4k4v3ll1.github.io/HomeWorks"
 }
