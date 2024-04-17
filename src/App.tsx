@@ -6,15 +6,17 @@ import {Music} from "./layout/music/Music";
 import {Settings} from "./layout/settings/Settings";
 import {Route, withRouter} from "react-router-dom";
 import {UsersContainer} from "./layout/users/UsersContainer";
-import ProfileContainer from "./layout/profile/ProfileContainer";
+
 import HeaderContainer from "./layout/header/HeaderContainer";
-import DialogsContainer from "./layout/dialogs/DialogsContainer";
 import Login from "./components/login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/preloader/Preloader";
+
+const DialogsContainer = React.lazy(() => import ("./layout/dialogs/DialogsContainer"))
+const ProfileContainer = React.lazy(() => import ("./layout/profile/ProfileContainer"))
 
 type MapStateToProps = {
     initialized: boolean
@@ -48,13 +50,19 @@ class App extends React.Component<AppProps> {
                         />
                         <Route
                             path='/profile/:userId?'
-                            render={() => (
-                                <ProfileContainer/>)}
+                            render={() => {
+                                return <React.Suspense fallback={<div>Loading...</div>}>
+                                    <ProfileContainer/>
+                                </React.Suspense>
+                            }}
                         />
                         <Route
                             path='/dialogs'
-                            render={() =>
-                                <DialogsContainer/>}
+                            render={() => {
+                                return <React.Suspense fallback={<div>Loading...</div>}>
+                                    <DialogsContainer/>
+                                </React.Suspense>
+                            }}
                         />
                         <Route
                             path='/users'

@@ -1,12 +1,28 @@
 .page {
-    font-size: 10px;
+    font-size: 14px;
     color: black;
     cursor: pointer;
 }
 
 .selectedPage {
-    font-size: 12px;
+    font-size: 16px;
     color: gold;
     font-weight: bold;
     cursor: pointer;
+}
+
+.paginator {
+    margin: 10px;
+}
+
+.pageNumber {
+    padding: 2px;
+    border: 1px solid grey;
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+    color: gold;
+    border-color: darkgoldenrod;
+    border-radius: 5px;
 }

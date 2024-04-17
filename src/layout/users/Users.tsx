@@ -28,6 +28,7 @@ export const Users: FC<UsersPropsType> = ({
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChanged={onPageChanged}
+                portionSize={5}
             />
             {users.map((u: UserType) =>
                 <User
