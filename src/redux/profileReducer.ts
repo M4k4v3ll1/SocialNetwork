@@ -1,6 +1,11 @@
 import {PostsType, ProfilePageType} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../components/api/Api";
+import {FormDataType} from "../layout/profile/ProfileInfo/ProfileDataForm";
+import {AppStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
+import {message} from "antd";
+import {promisify} from "node:util";
 
 export type ProfileType = {
     userId: number
@@ -30,7 +35,7 @@ const initialState = {
         {id: 2, message: 'It\'s my first post!', likesCount: 10}
     ],
     profile: {
-        userId: 1,
+        userId: 30705,
         aboutMe: '',
         fullName: '',
         contacts: {
@@ -57,12 +62,14 @@ export type ProfileReducerActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setUserStatus> |
-    ReturnType<typeof deletePostAC>
+    ReturnType<typeof deletePostAC> |
+    ReturnType<typeof savePhotoSuccess>
 
 export const addPostAC = (newPostText: string) => ({type: 'profile/ADD-POST', newPostText} as const)
 export const deletePostAC = (id: number) => ({type: 'profile/DELETE-POST', id} as const)
 export const setUserProfile = (profile: ProfileType) => ({type: 'profile/SET-USER-PROFILE', profile} as const)
 export const setUserStatus = (status: string) => ({type: 'profile/SET-USER-STATUS', status} as const)
+export const savePhotoSuccess = (photos: {small: string, large: string}) => ({type: 'profile/SAVE-PHOTO-SUCCESS', photos} as const)
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionsTypes): ProfilePageType => {
     switch (action.type) {
@@ -77,6 +84,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             return {...state, profile: action.profile}
         case 'profile/SET-USER-STATUS':
             return {...state, status: action.status}
+        case 'profile/SAVE-PHOTO-SUCCESS':
+            return {...state, profile: {...state.profile, photos: action.photos}}
         default: {
             return state
         }
@@ -97,5 +106,22 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     const res = await profileAPI.updateStatus(status)
             if (res.data.resultCode === 0) {
                 dispatch(setUserStatus(status))
+            }
+}
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.savePhoto(file)
+            if (res.data.resultCode === 0) {
+                dispatch(savePhotoSuccess(res.data.data.photos))
+            }
+}
+export const saveProfile = (profile: FormDataType) => async (dispatch: any, getState: () => AppStateType) => {
+    const userId = getState().auth.data.id + ''
+    const res = await profileAPI.saveProfile(profile)
+            if (res.data.resultCode === 0) {
+                dispatch(getProfile(userId))
+            } else {
+                dispatch(stopSubmit('edit-profile', {_error: res.data.messages[0]}))
+                return Promise.reject(res.data.messages[0])
             }
 }

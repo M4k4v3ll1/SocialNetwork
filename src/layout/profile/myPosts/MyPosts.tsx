@@ -17,7 +17,6 @@ export const MyPosts: FC<MyPostsPropsType> = memo((
         callbackOnClickAddPost
     }
 ) => {
-    console.log('Render MyPosts')
     const postElements = posts.map(p =>
         <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 

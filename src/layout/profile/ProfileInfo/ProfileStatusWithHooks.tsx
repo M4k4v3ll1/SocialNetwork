@@ -33,7 +33,7 @@ export const ProfileStatusWithHooks: FC<ProfileStatusPropsType> = ({status, upda
                 : <div>
                     <span
                         onDoubleClick={toggleMode}
-                    >{status || '-------'}
+                    ><b>Status: </b>{status || '-------'}
                 </span></div>
             }
         </div>
